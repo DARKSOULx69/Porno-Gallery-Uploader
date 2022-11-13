@@ -26,13 +26,24 @@ def download(client, message):
 
     bot.send_message(uid, "Started to Download Media...!")
 
-    ydl_opts= {
+    ydl_opts1= {
         'format': 'hls-1839-1',
         'outtmpl': 'Downloads/video.mp4'
     }
 
-    YT(ydl_opts).download(url)
-    
+    ydl_opts2= {
+        'format': 'hls-1842-1',
+        'outtmpl': 'Downloads/video.mp4'
+    }
+
+    try:
+        YT(ydl_opts1).download(url)
+    except:
+        try:
+            YT(ydl_opts2).download(url)
+        except:
+            pass
+
     bot.send_message(uid, "Sending the media!")
     bot.send_video(uid, "Downloads/video.mp4")
 
